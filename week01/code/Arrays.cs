@@ -6,14 +6,21 @@ public static class Arrays
     /// integer greater than 0.
     /// </summary>
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
+    /// This is the first step the function, it is already created!
     public static double[] MultiplesOf(double number, int length)
     {
-        // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        //I have created an array which name is "doubles". Also I use "lenght" to determine the number of items in the array! 
+        double [] doubles = new double [length];
 
-        return []; // replace this return statement with your own
+        //Then, I use a for bucle using the length paremeter and also i for the indexes of each element.
+        for (int i = 0; i < length; i++)
+        {
+            //We add items into the array, and also we make some modifications in order to do not include 0 in our array.
+            doubles[i] = number * (i + 1);
+        }
+
+        //Finally we return the array
+        return doubles; 
     }
 
     /// <summary>
@@ -25,9 +32,13 @@ public static class Arrays
     /// </summary>
     public static void RotateListRight(List<int> data, int amount)
     {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        //Save the last "amount" element in a temporary list
+        List <int> temp = data.GetRange(data.Count - amount, amount);
+
+        //Remove those elements from the end of the original list
+        data.RemoveRange(data.Count - amount, amount);
+
+        //Insert the saved elements from the end of the original list
+        data.InsertRange(0, temp);
     }
 }

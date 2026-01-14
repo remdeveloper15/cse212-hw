@@ -12,31 +12,31 @@ public static class StandardDeviation {
         Console.WriteLine(StandardDeviation3(numbers)); // Should be 147.322 
     }
 
-    private static double StandardDeviation1(int[] numbers) {
-        var total = 0.0;
-        var count = 0;
-        foreach (var number in numbers) {
+    private static double StandardDeviation1(int[] numbers) { //O(1)
+        var total = 0.0; //O(1)
+        var count = 0; //O(1)
+        foreach (var number in numbers) { //O(n)
             total += number;
             count += 1;
         }
 
-        var avg = total / count;
-        var sumSquaredDifferences = 0.0;
-        foreach (var number in numbers) {
+        var avg = total / count; //O(1)
+        var sumSquaredDifferences = 0.0; //O(1)
+        foreach (var number in numbers) { //O(n)
             sumSquaredDifferences += Math.Pow(number - avg, 2);
         }
 
-        var variance = sumSquaredDifferences / count;
-        return Math.Sqrt(variance);
+        var variance = sumSquaredDifferences / count; //O(1)
+        return Math.Sqrt(variance); //O(1)
     }
 
-    private static double StandardDeviation2(int[] numbers) {
-        var sumSquaredDifferences = 0.0;
-        var countNumbers = 0;
-        foreach (var number in numbers) {
-            var total = 0;
+    private static double StandardDeviation2(int[] numbers) { //O(1)
+        var sumSquaredDifferences = 0.0; //O(1)
+        var countNumbers = 0; //O(1)
+        foreach (var number in numbers) { //O(n)
+            var total = 0; 
             var count = 0;
-            foreach (var value in numbers) {
+            foreach (var value in numbers) { //O(n)
                 total += value;
                 count += 1;
             }
