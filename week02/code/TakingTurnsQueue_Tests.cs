@@ -11,7 +11,7 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3) and
     // run until the queue is empty
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: 1 Eror. The output returned Sue instead Bob, indicating that the queue is not respecting the FIFO order.
     public void TestTakingTurnsQueue_FiniteRepetition()
     {
         var bob = new Person("Bob", 2);
@@ -39,11 +39,13 @@ public class TakingTurnsQueueTests
         }
     }
 
+    //Documentation: PersonQueue.cs has been fixed, its function Enqueue has been corrected changed the Insert function for an Add function.  
+
     [TestMethod]
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3)
     // After running 5 times, add George with 3 turns.  Run until the queue is empty.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George
-    // Defect(s) Found: 
+    // Defect(s) Found: Any Defect was found
     public void TestTakingTurnsQueue_AddPlayerMidway()
     {
         var bob = new Person("Bob", 2);
@@ -85,7 +87,7 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (Forever), Sue (3)
     // Run 10 times.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: 1 Error. The expected result is Tim, but is Sue. The GetNextPerson does not handle for person that have 0 turns (Infinite Turns).
     public void TestTakingTurnsQueue_ForeverZero()
     {
         var timTurns = 0;
@@ -112,11 +114,13 @@ public class TakingTurnsQueueTests
         Assert.AreEqual(timTurns, infinitePerson.Turns, "People with infinite turns should not have their turns parameter modified to a very big number. A very big number is not infinite.");
     }
 
+    //Documentation: Code has been updated to work with people with 0 turns(Infinite).
+
     [TestMethod]
     // Scenario: Create a queue with the following people and turns: Tim (Forever), Sue (3)
     // Run 10 times.
     // Expected Result: Tim, Sue, Tim, Sue, Tim, Sue, Tim, Tim, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: 1 Error. The expected result is Tim, but is Sue. The GetNextPerson does not handle negative Turns values (Infinite Turns).
     public void TestTakingTurnsQueue_ForeverNegative()
     {
         var timTurns = -3;
@@ -140,10 +144,12 @@ public class TakingTurnsQueueTests
         Assert.AreEqual(timTurns, infinitePerson.Turns, "People with infinite turns should not have their turns parameter modified to a very big number. A very big number is not infinite.");
     }
 
+     //Documentation: Code has been updated to work with people with negative turns (Infinite).
+
     [TestMethod]
     // Scenario: Try to get the next person from an empty queue
     // Expected Result: Exception should be thrown with appropriate error message.
-    // Defect(s) Found: 
+    // Defect(s) Found: There is no Defect found.
     public void TestTakingTurnsQueue_Empty()
     {
         var players = new TakingTurnsQueue();
