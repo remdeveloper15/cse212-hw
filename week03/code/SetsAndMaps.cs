@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 public static class SetsAndMaps
@@ -21,8 +22,30 @@ public static class SetsAndMaps
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
     {
+        var set1 = new HashSet<string>();
+        List<string> pairs = new List<string>();
+        
+        foreach (var w in words)
+        {
+            if (w[0] == w[1])
+            {
+                continue;
+            }
+            
+            string reverse = $"{w[1]}{w[0]}";
+
+            if (set1.Contains(reverse))
+            {
+                pairs.Add($"{reverse} & {w}");
+            }
+            else
+            {
+                set1.Add(w);
+            }
+        }
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        return pairs.ToArray();
+
     }
 
     /// <summary>
@@ -42,7 +65,17 @@ public static class SetsAndMaps
         foreach (var line in File.ReadLines(filename))
         {
             var fields = line.Split(",");
-            // TODO Problem 2 - ADD YOUR CODE HERE
+            var d = fields[3];
+
+            if (degrees.ContainsKey(d))
+            {
+                degrees[d]++;
+                continue;
+            }
+            else
+            {
+                degrees.Add(d, 1);
+            }
         }
 
         return degrees;
@@ -66,8 +99,50 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        string clean1 = word1.Replace(" ", "").ToLower();
+        string clean2 = word2.Replace(" ", "").ToLower();
+        
+        if (clean1.Length != clean2.Length)
+        {
+            return false;
+        }
+
+        var angram = new Dictionary<char, int>();
+
+        foreach (var c in clean1)
+        {
+            if (angram.ContainsKey(c))
+            {
+                angram[c]++;
+            }
+            else
+            {
+                angram.Add(c, 1);
+            }
+
+        }
+
+        foreach (var c in clean2)
+        {
+            if(angram.ContainsKey(c))
+            {
+                angram[c]--;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        foreach (var a in angram)
+        {
+            if(a.Value != 0)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /// <summary>
